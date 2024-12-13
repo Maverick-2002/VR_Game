@@ -22,6 +22,9 @@ public class PuzzleChanger : MonoBehaviour
     {
         planetPuzzles[currentPuzzleIndex].SetActive(false);
         currentPuzzleIndex++;
-        planetPuzzles[currentPuzzleIndex].SetActive(true);
+        if (currentPuzzleIndex < planetPuzzles.Count)
+        {
+            planetPuzzles[currentPuzzleIndex].SetActive(true);
+        }
     }
 }
