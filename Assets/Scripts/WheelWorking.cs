@@ -58,6 +58,6 @@ public class WheelWorking : MonoBehaviour
     private IEnumerator ChangeLevelAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(8);
     }
 }
