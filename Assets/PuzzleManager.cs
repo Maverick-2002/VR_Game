@@ -26,10 +26,12 @@ public class PuzzleManager : MonoBehaviour
     GameObject[,] checkPointMatrix;
     public GameObject UI;
     public GameObject Checkpoints;
+    public GameObject blank;
 
     // Use this for initialization
     void Start()
     {
+        UI.SetActive(false);
         imageKeyMatrix = new GameObject[sizeRow, sizeCol];
         imageOfPictureMatrix = new GameObject[sizeRow, sizeCol];
         checkPointMatrix = new GameObject[sizeRow, sizeCol];
@@ -127,6 +129,7 @@ public class PuzzleManager : MonoBehaviour
                 Debug.Log("Game Is Complete");
                 UI.SetActive(true);
                 Checkpoints.SetActive(false);
+                blank.GetComponent<SpriteRenderer>().enabled = true;
 
             }
             else

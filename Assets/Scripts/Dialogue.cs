@@ -10,13 +10,14 @@ public class Dialogue : MonoBehaviour
     public float textspeed;
     private int index;
     public Animator animator;
-
+    public GameObject button;
 
     // Start is called before the first frame update
     void OnEnable()
     {
         textComponent.text = string.Empty;
         StartDialogue();
+        button.SetActive(false);
         
     }
     void StartDialogue()
@@ -32,17 +33,10 @@ public class Dialogue : MonoBehaviour
             textComponent.text += c;
             yield return new WaitForSeconds(textspeed);
         }
-        animator.SetBool("Idle", true);
+        if (animator != null)
+        {
+            animator.SetBool("Idle", true);
+        }
+        button.SetActive(true);
     }
-   /* void NextLine()
-    {
-        if (index < lines.Length-1) {
-            index++;
-            textComponent.text = string.Empty;
-            StartCoroutine (TypeLines());   
-        }
-        else{
-            gameObject.SetActive(false);
-        }
-    }*/
 }
