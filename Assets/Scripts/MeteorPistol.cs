@@ -5,94 +5,48 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class MeteorPistol : MonoBehaviour
 {
+    public LayerMask layerMask;
+    public ParticleSystem particles; 
     public Transform shootSource;
-    public float distance = 10f;             // Shooting distance
-    public float shootDelay = 0.1f;          // Delay between shots
+    public float distance = 10f;             
 
-    private bool isShooting = false;
+
+    private bool rayActivate = false;
 
     private void Start()
     {
         XRGrabInteractable grabInteractable = GetComponent<XRGrabInteractable>();
 
-        // Add listener for activated event
-        grabInteractable.activated.AddListener(OnActivated);
-
-        // Add listener for deactivated event
-        grabInteractable.deactivated.AddListener(OnDeactivated);
+        grabInteractable.activated.AddListener(x => StartShoot());
+        grabInteractable.deactivated.AddListener(x => StopShoot());        
     }
 
-    private void OnActivated(ActivateEventArgs args)
+    private void Update()
     {
-        if (args.interactorObject is IXRActivateInteractor activateInteractor)
+        if (rayActivate)
         {
-            StartShooting(activateInteractor); // Call StartShooting with the interactorObject
+            RaycastCheck();
         }
     }
 
-    private void OnDeactivated(DeactivateEventArgs args)
+    public void StartShoot()
     {
-        if (args.interactorObject is IXRActivateInteractor activateInteractor)
-        {
-            StopShooting(activateInteractor); // Call StopShooting with the interactorObject
-        }
+        particles.Play();
+        rayActivate = true;
     }
 
-    private void StartShooting(IXRActivateInteractor interactor)
+    public void StopShoot()
     {
-        if (!isShooting)
-        {
-            isShooting = true;
-            StartCoroutine(ShootingRoutine());
-        }
+        particles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        rayActivate = false;
     }
 
-    private void StopShooting(IXRActivateInteractor interactor)
-    {
-        isShooting = false;
-        // Add any necessary cleanup for shooting here
-    }
-
-    private IEnumerator ShootingRoutine()
-    {
-        while (isShooting)
-        {
-            Shoot();
-            yield return new WaitForSeconds(shootDelay);
-        }
-    }
-
-    private void Shoot()
-    {
-        // Get shooting particle from object pool
-        GameObject shootingParticle = ObjectPoolManager.Instance.GetPooledObject();
-        if (shootingParticle != null)
-        {
-            shootingParticle.transform.position = shootSource.position;
-            shootingParticle.transform.rotation = shootSource.rotation;
-
-            // Activate and play shooting particle
-            shootingParticle.SetActive(true);
-            shootingParticle.GetComponent<ParticleSystem>().Play();
-
-            // Deactivate after particle duration
-            StartCoroutine(DeactivateAfterTime(shootingParticle));
-        }
-
-        // Perform raycast to detect hits
-        RaycastCheck();
-    }
-
-    private IEnumerator DeactivateAfterTime(GameObject obj)
-    {
-        yield return new WaitForSeconds(distance / 10); // Adjust as per particle speed and distance
-        obj.SetActive(false);
-    }
 
     private void RaycastCheck()
     {
         RaycastHit hit;
-        if (Physics.Raycast(shootSource.position, shootSource.forward, out hit, distance))
+        bool hasHit = Physics.Raycast(shootSource.position, shootSource.forward, out hit, distance, layerMask);
+        if (hasHit)
         {
             hit.transform.gameObject.SendMessage("Break", SendMessageOptions.DontRequireReceiver);
         }
