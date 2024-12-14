@@ -17,23 +17,6 @@ MonoBehaviour:
   m_bufferingTime: 0.1
   m_ClipProperties:
     volume: 1
---- !u!114 &-8741091620375593790
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
-  m_Name: AudioPlayableAsset
-  m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: 79942e8603c8ed944a6e99ec67397957, type: 3}
-  m_Loop: 0
-  m_bufferingTime: 0.1
-  m_ClipProperties:
-    volume: 1
 --- !u!114 &-8077962368078479287
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -534,39 +517,6 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Core replaced
-  - m_Version: 1
-    m_Start: 28.216666666666665
-    m_ClipIn: 0
-    m_Asset: {fileID: -8741091620375593790}
-    m_Duration: 5.58
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: -5444205062613667807}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: Push Button
   m_Markers:
     m_Objects: []
   m_TrackProperties:
@@ -1638,10 +1588,10 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 28.216666666666665
+    m_Start: 31.564965986394558
     m_ClipIn: 0
     m_Asset: {fileID: -926838378317188667}
-    m_Duration: 19.439999999999998
+    m_Duration: 16.091700680272105
     m_TimeScale: 1
     m_ParentTrack: {fileID: 8438288373846434140}
     m_EaseInDuration: 0
