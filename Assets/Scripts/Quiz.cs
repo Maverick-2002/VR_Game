@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine.UI;
 
 public class Quiz : MonoBehaviour
 {
     public GameObject[] questionPanels;      // Array of all question panels, including the starting panel
     public TextMeshProUGUI feedbackText;     // TMP element for feedback messages
+    public TextMeshProUGUI scoreText;        // TMP element to display the score at the end
     private int currentPanelIndex = 0;       // Index of the currently active panel
     private bool quizStarted = false;        // Boolean to check if the quiz has started
+    private int score = 0;                   // Variable to keep track of the score
+
+    public GameObject lastButton; 
 
     void Start()
     {
+        lastButton.SetActive(false);
         // Deactivate all panels initially, then activate the first one (the starting panel)
         foreach (GameObject panel in questionPanels)
         {
@@ -47,6 +52,7 @@ public class Quiz : MonoBehaviour
         {
             feedbackText.text = "Correct!";
             feedbackText.color = Color.green; // Set the text color to green for correct answer
+            score++; // Increase score for correct answer
         }
         else
         {
@@ -79,8 +85,16 @@ public class Quiz : MonoBehaviour
         else
         {
             Debug.Log("Quiz Completed!");
-            // Optionally, add end-of-quiz logic here (e.g., show score, restart button, etc.)
+            ShowFinalScore(); // Show the score when the quiz is completed
         }
+    }
+
+    // Method to display the final score
+    private void ShowFinalScore()
+    {
+        lastButton.SetActive(true);
+
+        scoreText.text = "Final Score: " + score.ToString(); // Display the score on the screen
     }
 
     // Helper method to show a panel based on its index
