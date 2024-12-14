@@ -14,8 +14,6 @@ public class MachineTimeline : MonoBehaviour
     [SerializeField] float timeLeft = 0.0f;
     public float sliderfillvalue = 0f;
     [ShowNonSerializedField] int currentIndex = -1;
-    [SerializeField] GameObject NextButton; 
-    [SerializeField] GameObject PrevButton;
     [SerializeField] GameObject product;
     [SerializeField] GameObject productUI;
 
@@ -27,22 +25,18 @@ public class MachineTimeline : MonoBehaviour
         currentIndex = -1;
         canInteract = true;
         slider.maxValue = interactables.Count * 0.15f;
-        PrevButton.SetActive(false);
         product.SetActive(false);
         productUI.SetActive(false);
     }
     [Button]
     public void Next()
     {
-        PrevButton.SetActive(true);
         if (currentIndex == interactables.Count - 1 || !canInteract) { return; }
         currentIndex++;
         interactables[currentIndex].Interact();
         sliderfillvalue += 0.15f;
         AnimateSlider(sliderfillvalue, 1.5f);
         if (currentIndex == interactables.Count - 1) {
-            NextButton.SetActive(false);
-            PrevButton.SetActive(true);
             product.SetActive(true);
             productUI.SetActive(true);
 
@@ -53,7 +47,6 @@ public class MachineTimeline : MonoBehaviour
     [Button]
     public void Previous() 
     { 
-        NextButton.SetActive(true) ;
         product.SetActive(false);
         productUI.SetActive(false);
         if(currentIndex < 0 || !canInteract) { return; }
@@ -62,8 +55,6 @@ public class MachineTimeline : MonoBehaviour
         sliderfillvalue -= 0.15f;
         AnimateSlider(sliderfillvalue, 1.5f);
         if (currentIndex < 0) {
-            PrevButton.SetActive(false);
-            NextButton.SetActive(true);
 
         }
 

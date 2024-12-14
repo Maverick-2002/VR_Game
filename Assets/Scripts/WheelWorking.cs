@@ -13,10 +13,18 @@ public class WheelWorking : MonoBehaviour
     public GameObject timerScript;
     public GameObject smokeVfx;
     public GameObject Checkbox;
+    public GameObject video;
+    public GameObject BeforeUI;
+    public GameObject AfterUI;
 
     private bool hasWheelIncreasedOxygen;
-    
 
+    private void Awake()
+    {
+        video.SetActive(false);
+        BeforeUI.SetActive(true);
+        AfterUI.SetActive(false);
+    }
     void Start()
     {
 
@@ -51,13 +59,15 @@ public class WheelWorking : MonoBehaviour
         Checkbox.SetActive(true);
 
         Debug.Log("Oxygen regenerated __");
-
-        StartCoroutine(ChangeLevelAfterDelay(25f));
+        BeforeUI.SetActive(false);
+        AfterUI.SetActive(true);
+        StartCoroutine(ChangeLevelAfterDelay(10f));
     }
 
     private IEnumerator ChangeLevelAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene(8);
+        //SceneManager.LoadScene(8);
+        video.SetActive(true);
     }
 }
