@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -50,6 +51,13 @@ public class VideoControl : MonoBehaviour
        enableobject.SetActive(true);
           
     }
+
+    [Button]
+    private void skip()
+    {
+        videoPlayer.Stop();
+        enableobject.SetActive(true);
+    }  
     private void OnDestroy()
     {
         // Unsubscribe from the event to avoid memory leaks
